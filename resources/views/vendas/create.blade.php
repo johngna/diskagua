@@ -35,22 +35,15 @@
                                         <i class="fa fa-user"></i> <label>Cliente</label>
 
                                         <select class="form-control form-control-sm js-select" name="cliente_id" id="cliente_id" required data-dependent="animal_id" onchange="atualiza_animal()">
-                                            {{--<option value="0"  selected="selected">Cliente não Identificado</option>--}}
+                                            @if(isset($cliente))
+                                                <option value="{{$cliente->id}}"  selected="selected">{{$cliente->nome}}</option>
+                                            @endif
                                         </select>
 
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <i class="fa fa-paw"></i> <label>Animal</label>
 
-                                        <select class="form-control form-control-sm" name="animal_id" id="animal_id">
-                                            {{--<option value="0"  selected="selected">Vendedor Logado</option>--}}
-                                            <option value="">Selecione um cliente primeiro</option>
-                                        </select>
-                                    </div>
-                                </div>
 
 
                             </div>

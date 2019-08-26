@@ -24,6 +24,8 @@ class ClienteController extends AppController
 
     }
 
+
+
     //sobrescrever o metodo store para salvar as categorias
     public function store(Request $request)
     {
@@ -113,20 +115,10 @@ class ClienteController extends AppController
                 //
                 $registros = $this->model::where('nome', 'like', '%'. $request->descricao .'%')->get();
                 break;
-            case 'nome_animal':
+            case 'telefone':
                 //
-                $clientes =   DB::table('clientes')->select('clientes.id')->join('animais','animais.cliente_id','clientes.id')->where('animais.nome', 'like', '%'. $request->descricao .'%')->get();
 
-                $ids = array();
-
-                foreach($clientes as $key => $cliente){
-
-                    $ids[] =  $cliente->id;
-                }
-
-
-                $registros = $this->model::whereIn('id',  $ids )->get();
-
+                $registros =  $this->model::where('celular', 'like', '%'. $request->descricao .'%')->orWhere('telefone', 'like', '%'. $request->descricao .'%')->get();
                 break;
             case 'CPF':
                 //

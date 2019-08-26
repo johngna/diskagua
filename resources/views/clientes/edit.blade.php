@@ -49,10 +49,10 @@
                                     <a class="nav-link @if(Session::get('status') != 'Animal Incluido') active @endif  show" id="pills-home-tab" data-toggle="pill" href="#kt_portlet_base_demo_1_1_tab_content" role="tab" aria-controls="pills-home" aria-selected="true">Geral</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link show" id="pills-profile-tab" data-toggle="pill" href="#kt_portlet_base_demo_1_2_tab_content" role="tab" aria-controls="pills-profile" aria-selected="false">Associação</a>
+                                    <a class="nav-link show" id="pills-profile-tab" data-toggle="pill" href="#kt_portlet_base_demo_1_2_tab_content" role="tab" aria-controls="pills-profile" aria-selected="false">Categoria</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link @if(Session::get('status') == 'Animal Incluido') active @endif  show" id="pills-contact-tab" data-toggle="pill" href="#kt_portlet_base_demo_1_3_tab_content" role="tab" aria-controls="pills-contact" aria-selected="false"> Animais</a>
+                                    <a class="nav-link @if(Session::get('status') == 'Animal Incluido') active @endif  show" id="pills-contact-tab" data-toggle="pill" href="#kt_portlet_base_demo_1_3_tab_content" role="tab" aria-controls="pills-contact" aria-selected="false"> Entregas</a>
                                 </li>
                             </ul>
 
@@ -233,7 +233,7 @@
 
                         <div class="card code-table" style="margin: -25px;">
                             <div class="card-header">
-                                <h5>Associação</h5>
+                                <h5>Categorias</h5>
                                 <div class="card-header-right">
 
                                     <button type="button" class="btn btn-primary btn-sm btn-rounded" onclick="addRow();">+ Nova</button>
@@ -277,60 +277,52 @@
                     <div class="tab-pane @if(Session::get('status') == 'Animal Incluido') active @endif" id="kt_portlet_base_demo_1_3_tab_content" role="tabpanel">
 
 
-                            @if(count($registro->animais))
+                            @if(count($registro->vendas))
 
                                 <div style="text-align: right">
 
-                                    <a href="" class="btn btn-primary btn-sm btn-rounded pull-right"  data-toggle="modal" data-target="#exampleModal2" onclick="reset_form()"> Novo Animal</a>
+                                    <a href="{{route('vendas.create', ['cliente_id' => $registro->id])}}" class="btn btn-primary btn-sm btn-rounded pull-right"> Nova Entrega</a>
 
                                     <hr>
                                 </div>
 
                                 <div class="row">
 
-                                @foreach($registro->animais  as $key => $animal)
 
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="card @if($animal->status == 'Obito') card-border-c-red @endif">
-                                        <div class="card-block p-0">
-                                            <div class="text-center project-main">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover  table-list" id="myTable">
+                                            <thead>
+                                            <tr>
+                                                <th width="50">ID</th>
+                                                <th width="50">Status</th>
+                                                <th>Data</th>
+                                                <th>Cliente</th>
+
+                                                <th>Valor</th>
+                                                <th width="50">Opção</th>
+
+                                            </tr></thead>
+                                            <tbody>
 
 
-                                                <i class="fa fa-paw" style="font-size:60px;"></i>
-                                                <h5 class="mt-4">{{$animal->nome}}</h5>
-                                                <span>{{$animal->nome}}</span>
-                                                <div class="row m-t-30">
-                                                    @if($animal->status != 'Obito')
-                                                    <div class="col-6 p-r-0">
-                                                        <a href="#!" class="btn  border btn-block btn-outline-secondary" onclick="incluir_fila({{$animal->id}})">Atendimento</a>
-                                                        <a href="#!" class="btn  border btn-block btn-outline-secondary" onclick="internar({{$animal->id}})">Internar</a>
-                                                    </div>
-                                                    @endif
-                                                    <div class="col-6">
-                                                        @if(isset($animal->Atendimentos[0]))
-                                                            <a href="{{route('atendimentos.edit', $animal->Atendimentos[0]->id)}}" class="btn  border btn-block btn-outline-secondary">Prontuário</a>
-                                                        @else
-                                                            <a href="#" class="btn  border btn-block btn-outline-secondary" onclick="alert('Não é possivel acessar o prontuário pois esse animal não possui nenhum atendimento registrado!')">Prontuário</a>
-                                                        @endif
+                                @foreach($registro->vendas  as $key => $venda)
 
-                                                            <a href="#!" class="btn @if($animal->status != 'Obito') btn-primary @else btn-danger  @endif  btn-block" onclick="editar_animal({{$animal->id}})">Editar</a>
+                                        <tr>
+                                            <td width="50">{{$venda->id}} </td>
+                                            <td width="50">{{$venda->status}} </td>
+                                            <td style="padding-left:10px;"> {{date('d/m/Y', strtotime($venda->created_at))}} </td>
+                                            <td>{{$venda->Cliente->nome}} </td>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="border-top"></div>
-                                            <div class="project-main" style="padding: 0px">
-                                                <div class="row text-center">
-                                                    <div class="col-12">
+                                            <td>{{$venda->total_venda_liquido}} </td>
+                                            <td style="padding:8px"> <a class="text-white label theme-bg" href="{{route('vendas.edit', $venda->id)}}">Acessar</a> </td>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </tr>
 
                                 @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                             @else
 
@@ -338,11 +330,11 @@
 
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <div><i class="fas fa-paw m-r-5" style="font-size:68px; padding:50px"></i></div>
+                                            <div><i class="feather icon-shopping-cart m-r-5" style="font-size:68px; padding:50px"></i></div>
 
-                                            <h5 class="card-title">Cliente sem Animais Cadastrados</h5>
-                                            <p class="card-text">Este cliente não possui nenhum animal cadastrado. Clique no botão abaixo para cadastrar.</p>
-                                            <a href="" class="btn btn-primary btn-sm btn-rounded"  data-toggle="modal" data-target="#exampleModal2" onclick=""> Novo Animal</a>
+                                            <h5 class="card-title">Cliente sem Entregas</h5>
+                                            <p class="card-text">Este cliente não possui nenhuma entrega. Clique no botão abaixo para cadastrar.</p>
+                                            <a href="{{route('vendas.create', ['cliente_id' => $registro->id])}}" class="btn btn-primary btn-sm btn-rounded pull-right"> Nova Entrega</a>
                                         </div>
                                     </div>
                                 </div>
@@ -398,19 +390,24 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Cadastrar Animal</h5>
+                    <h5 class="modal-title">Registrar Venda Rápida</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form id="animal-form" action="{{ route('animais.store') }}" method="post">
+                <form id="animal-form" action="{{ route('vendas.create') }}" method="get">
 
                     @csrf
 
 
                     <div class="modal-body">
-                        @include('clientes.animais')
+
+
+                        <input type="hidden" name="cliente_id" id="cliente_id" value="{{$registro->id}}">
+                        <input type="hidden" name="vendedor_id" id="vendedor_id" value="{{Auth::user()->id}}">
+
+
                     </div>
                     <div class="modal-footer">
                         <a href="{{route('animais.store')}}" class="btn btn-primary" onclick="event.preventDefault();

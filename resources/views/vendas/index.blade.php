@@ -50,7 +50,7 @@
                             <th width="50">Status</th>
                             <th>Data</th>
                             <th>Cliente</th>
-                            <th>Pet</th>
+
                             <th>Valor</th>
                             <th width="50">Opção</th>
 
@@ -66,15 +66,7 @@
                                 <td width="50">{{$venda->status}} </td>
                                 <td style="padding-left:10px;"> {{date('d/m/Y', strtotime($venda->created_at))}} </td>
                                 <td>{{$venda->Cliente->nome}} </td>
-                                <td>
 
-                                @if(isset($venda->Animal->nome))
-                                   {{$venda->Animal->nome}}
-                                @else
-                                        Venda sem Pet
-                                @endif
-
-                                </td>
                                 <td>{{$venda->total_venda_liquido}} </td>
                                 <td style="padding:8px"> <a class="text-white label theme-bg" href="{{route('vendas.edit', $venda->id)}}">Acessar</a> </td>
 

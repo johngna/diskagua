@@ -44,7 +44,7 @@
 
 
 
-                @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-atendimento'))
+                {{--@if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-atendimento'))
                 <li  class="nav-item">
                     <a href="{{route('atendimentos.index')}}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-globe "></i></span><span class="pcoded-mtext">Fila Atendimento</span></a>
                 </li>
@@ -61,7 +61,7 @@
                 <li  class="nav-item">
                     <a href="{{route('associacao.index')}}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-star "></i></span><span class="pcoded-mtext">Associação</span></a>
                 </li>
-                @endif
+                @endif--}}
 
                 @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-receber'))
                 <li  class="nav-item">
@@ -90,21 +90,21 @@
                         <li class=""><a href="{{route('setores.index')}}" class="">Setores</a></li>
                         @endif
 
-                            @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-setor'))
+                           {{-- @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-setor'))
                                 <li class=""><a href="{{route('leitos.index')}}" class="">Leitos</a></li>
-                            @endif
+                            @endif--}}
 
                         @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-formaPagamento'))
                         <li class=""><a href="{{route('forma_pagamentos.index')}}" class="">Forma de Pagamentos</a></li>
                         @endif
 
-                        @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-raca'))
+                       {{-- @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-raca'))
                         <li class=""><a href="{{route('racas.index')}}" class="">Raças</a></li>
-                        @endif
+                        @endif--}}
 
-                        @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-vacina'))
+                       {{-- @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-vacina'))
                         <li class=""><a href="{{route('vacinas.index')}}" class="">Vacinas</a></li>
-                        @endif
+                        @endif--}}
 
                         @if(auth()->check() && auth()->user()->hasPermissionThroughRole('view-nfce'))
                         <li class=""><a href="{{route('nfces.index')}}" class="">NFCE</a></li>

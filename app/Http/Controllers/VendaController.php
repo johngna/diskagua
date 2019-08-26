@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clientes\Cliente;
 use App\Models\Forma_Pagamentos\Forma_Pagamento;
 use App\Models\Itens\Item;
 use App\Models\Pagamentos\Pagamento;
@@ -31,8 +32,25 @@ class VendaController extends AppController
 
     }
    
-    public function create()
+    public function create(Request $request)
     {
+
+
+        if(isset($request->cliente_id)){
+
+
+            $cliente = Cliente::where('id', $request->cliente_id)->first();
+
+
+            $instace = new $this->model;
+            $formaPagamentos = Forma_Pagamento::all();
+            $vendedores = User::all();
+
+            return view($this->name.'.create', compact('instace','formaPagamentos','vendedores','cliente'));
+
+        }
+
+
         $instace = new $this->model;
 
         $formaPagamentos = Forma_Pagamento::all();
@@ -42,12 +60,13 @@ class VendaController extends AppController
     }
 
 
+
+
     public function store(Request $request)
     {
 
         $dados['cliente_id'] = $request->cliente_id;
         $dados['user_id'] = $request->vendedor_id;
-        $dados['animal_id'] = $request->animal_id;
         $dados['tipo'] = 'Venda';
         $dados['status'] = 'Aberta';
 

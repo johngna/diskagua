@@ -22,10 +22,11 @@
 
                     <div class="input-group mb-3">
                         <select class="form-control" name="campo">
+                            <option value="telefone">Telefone</option>
                             <option value="nome_cliente">Cliente</option>
                             <option value="CPF">CPF/CNPJ</option>
                             {{--<option value="nascimento">Data Nascimento</option>--}}
-                            <option value="nome_animal">Animal</option>
+
                         </select>
 
                     </div>
@@ -43,6 +44,8 @@
                     </div>
 
                     </form>
+
+                    <div class="alert alert-primary">Se telefone usar o padrão 99999-9999</div>
 
                 </div>
             </div>
@@ -76,12 +79,13 @@
                             </td>
                             <td>
 
-                                <h6 class="text-muted"> @foreach($registro->animais as $animal) {{$animal->nome}} <br> @endforeach</h6>
+                                <h6 class="text-muted"> {{$registro->endereco}} - {{$registro->complemento}} <br> {{$registro->bairro}} - {{$registro->cidade}} </h6>
                             </td>
                             <td style="text-align:right;">
 
 
 
+                                <a href="{{route('vendas.create', ['cliente_id' => $registro->id])}}" class="label theme-bg2 text-white f-12" style="margin-right:20px;">Venda</a>
                                 <a href="{{route('clientes.edit', $registro->id)}}" class="label theme-bg text-white f-12" style="margin-right:20px;">Acessar</a>
 
 

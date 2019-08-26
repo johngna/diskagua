@@ -71,40 +71,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <i class="fa fa-paw"></i> <label>Animal</label>
 
-                                        @if(isset($venda[0]->Animal->nome))
-                                        <div id="ven_nome" onclick="document.getElementById('ven_id').style.display = 'block';document.getElementById('ven_nome').style.display = 'none';atualiza_animal();">
-                                        <h5>{{$venda[0]->Animal->nome}}</h5>
-                                        </div>
-
-
-                                        <div id="ven_id" style="display:none">
-                                            <select class="form-control form-control-sm" name="animal_id" id="animal_id">
-                                                {{--<option value="0"  selected="selected">Vendedor Logado</option>--}}
-                                                <option value="">confirme o Cliente</option>
-                                            </select>
-                                        </div>
-
-                                        @else
-
-                                            <div id="ven_id" style="display:none">
-                                                <select class="form-control form-control-sm" name="animal_id" id="animal_id">
-                                                    {{--<option value="0"  selected="selected">Vendedor Logado</option>--}}
-                                                    <option value="">confirme o cliente</option>
-                                                </select>
-                                            </div>
-
-                                            <div id="ven_id2" onclick="document.getElementById('ven_id').style.display = 'block';document.getElementById('ven_id2').style.display = 'none';atualiza_animal();">
-                                                <span class="text-danger mb-1" >Sem Animal definido...</span>
-                                            </div>
-
-                                        @endif
-
-                                    </div>
-                                </div>
 
                                 <div class="col-md-2">
                                     <div class="form-group">

@@ -25,4 +25,10 @@ class Cliente extends ModelDefault
         return $this->hasMany('App\Models\Animais\Animal');
     }
 
+
+    public function vendas()
+    {
+        return $this->hasMany('App\Models\Vendas\Venda');
+    }
+
 }
